@@ -1,4 +1,3 @@
-from SimpleQIWI import *
 import os, sys
 import time
 
@@ -7,6 +6,12 @@ except ImportError:
     errMsg("[ requests ] Модуль не установлен")
     print("    [*] Команда для установки pip install requests")
     sys.exit(1)
+try:import SimpleQIWI
+except ImportError:
+    errMsg("[ SimpleQIWI ] Модуль не установлен")
+    print("    [*] Команда для установки pip install SimpleQIWI")
+    sys.exit(1)
+from SimpleQIWI import *
 from requests import api
 nu = '\033[0m'
 re = '\033[1;31m'
