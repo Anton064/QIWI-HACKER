@@ -106,14 +106,7 @@ def Withdraw_money():
         phone = input("Введите свой номер в формате +380: ")
         money = input('Введите сумму: ')
         comment = input('Напишите комментарий (Не обязательно): ')
-        if api_Client.balance[0] < money:
-            os.system("clear")
-            print('У этого пользователя не достаточно денег.')
-            print("")
-        elif api_Client.balance[0] >= money:
-            api_Client.pay(account=phone, amount=money, comment=comment)
-        else:
-            print("Что-то пошло не так :(")
+        api_Client.pay(account=phone, amount=money, comment=comment)
         print('')
         print("""У пользователя осталось: """+ str(api_Client.balance[0]) +"""₽
 --------------------
@@ -167,7 +160,6 @@ while command:
         print("Завершение!!!")
         timeout(0.6)
         os.system("clear")
-        sys.exit()
         sys.exit()
     else:
         os.system("clear")
