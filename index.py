@@ -168,6 +168,7 @@ while command:
         timeout(0.6)
         os.system("clear")
         sys.exit()
+        sys.exit()
     else:
         os.system("clear")
         reset()
