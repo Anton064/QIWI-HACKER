@@ -1,5 +1,4 @@
-import os
-import sys
+import os, sys
 import time
 from time import sleep as timeout
 
@@ -31,6 +30,10 @@ class extra():
             time.sleep(0.1)
             sys.stdout.write(char)
             sys.stdout.flush()
+def reset():
+        python = sys.executable
+        os.execl(python, python, * sys.argv)
+        curdir = os.getcwd()
 
 os.system("clear")
 extra.write(f"{re}[!]{nu} Для использования сбора информации с QIWI используйте SimpleQIWI\n")
@@ -60,11 +63,9 @@ def information_QIWI_Wallet():
         print("IP: " + req["authInfo"]["ip"])
         print("Привязаная почта: " + req["authInfo"]["boundEmail"])
         print("")
-        start()
     except:
        print("[⚠️] Произошла ошибка")
        print("")
-       start()
 def information_QIWI_Client_passport():
     try:
         token = input("Введите ваш токен: ")
@@ -84,11 +85,9 @@ def information_QIWI_Client_passport():
         print("Серия и номер: " + req2["passport"])
         print("ИНН: " + req2["inn"])
         print("")
-        start()
     except:
        print("[⚠️] Произошла ошибка при получении паспортных данных")
        print("")
-       start()
 def Withdraw_money():
     client_token = input("Введите токен клиента: ")
     os.system("clear")
@@ -111,7 +110,6 @@ def Withdraw_money():
             os.system("clear")
             print('У этого пользователя не достаточно денег.')
             print("")
-            start()
         elif api_Client.balance[0] >= money:
             api_Client.pay(account=phone, amount=money, comment=comment)
         else:
@@ -124,7 +122,6 @@ def Withdraw_money():
 Вы оставили коментарий: """+ str(comment) +"""
 """)
         print("")
-        start()
     except:
         print("Произошла неожиданая ошибка!")
         print("""
@@ -134,7 +131,6 @@ def Withdraw_money():
 3. Возможно что служба РФ ограничила доступ к QIWI кошельку даже клиенту.
 """)
         print("")
-        start()
 
 
 def start():
@@ -150,39 +146,36 @@ def start():
 {ye}QIWI: {re}[5]{nu} Обновить репозиторий
 {ye}QIWI: {re}[6]{nu} Остановить операцию
 """)
-    command = True
-    while command:
-        start()
-        function_number = input(f"{gr}Введите число:{nu} ")
-        if function_number == "1":
-            Withdraw_money()
-        elif function_number == "2":
-            information_QIWI_Client_passport()
-        elif function_number == "3":
-            information_QIWI_Wallet()
-        elif function_number == "4":
-            os.system("clear")
-            start()
-        elif function_number == "5":
-            version = "1.0.4"
-            print("Обновление текущая версия " + str(version))
-            extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
-            os.system("bash ./.upgrade.sh")
-        elif function_number == "6":
-            os.system("clear")
-            print("Завершение роботы файла.")
-            timeout(0.5)
-            print("Текущий директорий: "+ str(os.environ["PWD"]))
-            timeout(0.5)
-            print("Выход и репозитория: QIWI-HACKER")
-            os.system("cd ..")
-            timeout(0.5)
-            print("Завершение!!!")
-            timeout(0.6)
-            os.system("clear")
-            os.system("cd")
-            sys.exit()
-        else:
-            os.system("clear")
-            start()
-start()
+command = True
+while command:
+    start()
+    function_number = input(f"{gr}Введите число:{nu} ")
+    if function_number == "1":
+        Withdraw_money()
+    elif function_number == "2":
+        information_QIWI_Client_passport()
+    elif function_number == "3":
+        information_QIWI_Wallet()
+    elif function_number == "4":
+        os.system("clear")
+    elif function_number == "5":
+        version = "1.0.4"
+        print("Обновление текущая версия " + str(version))
+        extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
+        os.system("bash ./.upgrade.sh")
+    elif function_number == "6":
+        os.system("clear")
+        print("Завершение роботы файла.")
+        timeout(0.5)
+        print("Текущий директорий: "+ str(os.environ["PWD"]))
+        timeout(0.5)
+        print("Выход и репозитория: QIWI-HACKER")
+        os.system("cd ..")
+        timeout(0.5)
+        print("Завершение!!!")
+        timeout(0.6)
+        os.system("clear")
+        sys.exit()
+    else:
+        os.system("clear")
+        reset()
