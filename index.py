@@ -123,13 +123,13 @@ def Withdraw_money():
 
 def start():
     print(f"{re}!Выберите число!{nu}")
-    print("""
-1. Вывести
-2. Узнать паспортные данные
-3. Узнать информацию о QIWI кошельке
-4. Очистить терминал
-5. Обновить репозиторий
-6. Остановить операцию
+    print(f"""
+{re}[1.]{nu} Вывести
+{re}[2.]{nu} Узнать паспортные данные
+{re}[3.]{nu} Узнать информацию о QIWI кошельке
+{re}[4.]{nu} Очистить терминал
+{re}[5.]{nu} Обновить репозиторий
+{re}[6.]{nu} Остановить операцию
 """)
     function_number = input("Введите число: ")
     if function_number == "1":
@@ -142,8 +142,8 @@ def start():
         os.system("clear")
         start()
     elif function_number == "5":
-        version = "1.0.1"
-        print("Обновление текущая версия" + str(version))
+        version = "1.0.2"
+        print("Обновление текущая версия " + str(version))
         extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
         os.system("./.lib/.upgrade.sh")
     elif function_number == "6":
