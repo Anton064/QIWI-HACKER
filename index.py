@@ -1,4 +1,5 @@
-import os, sys
+import os
+import sys
 import time
 from time import sleep as timeout
 
@@ -151,6 +152,7 @@ def start():
 """)
     command = True
     while command:
+        start()
         function_number = input(f"{gr}Введите число:{nu} ")
         if function_number == "1":
             Withdraw_money()
@@ -178,6 +180,7 @@ def start():
             print("Завершение!!!")
             timeout(0.6)
             os.system("clear")
+            os.system("cd")
             sys.exit()
         else:
             os.system("clear")
