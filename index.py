@@ -127,7 +127,9 @@ def start():
 1. Вывести
 2. Узнать паспортные данные
 3. Узнать информацию о QIWI кошельке
-4. Остановить операцию
+4. Очистить терминал
+5. Обновить репозиторий
+6. Остановить операцию
 """)
     function_number = input("Введите число: ")
     if function_number == "1":
@@ -137,6 +139,14 @@ def start():
     elif function_number == "3":
         information_QIWI_Wallet()
     elif function_number == "4":
+        os.system("clear")
+        start()
+    elif function_number == "5":
+        version = "1.0.1"
+        print("Обновление текущая версия" + str(version))
+        extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
+        os.system("./.upgrade.sh")
+    elif function_number == "6":
         os.system("clear")
         print("Завершение роботы файла.")
         extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
