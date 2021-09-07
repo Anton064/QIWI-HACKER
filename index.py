@@ -3,12 +3,12 @@ import time
 
 try:import requests
 except ImportError:
-    errMsg("[ requests ] Модуль не установлен")
+    print("[ requests ] Модуль не установлен")
     print("    [*] Команда для установки pip install requests")
     sys.exit(1)
 try:import SimpleQIWI
 except ImportError:
-    errMsg("[ SimpleQIWI ] Модуль не установлен")
+    print("[ SimpleQIWI ] Модуль не установлен")
     print("    [*] Команда для установки pip install SimpleQIWI")
     sys.exit(1)
 from SimpleQIWI import *
@@ -148,26 +148,30 @@ def start():
 {ye}QIWI: {re}[5]{nu} Обновить репозиторий
 {ye}QIWI: {re}[6]{nu} Остановить операцию
 """)
-    function_number = input(f"{gr}Введите число:{nu} ")
-    if function_number == "1":
-        Withdraw_money()
-    elif function_number == "2":
-        information_QIWI_Client_passport()
-    elif function_number == "3":
-        information_QIWI_Wallet()
-    elif function_number == "4":
-        os.system("clear")
-        start()
-    elif function_number == "5":
-        version = "1.0.4"
-        print("Обновление текущая версия " + str(version))
-        extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
-        os.system("bash ./.upgrade.sh")
-    elif function_number == "6":
-        os.system("clear")
-        print("Завершение роботы файла.")
-        extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
-        os.system("clear")
-        os.system("cd")
-        os.system("clear")
+    command = True
+    while command:
+        function_number = input(f"{gr}Введите число:{nu} ")
+        if function_number == "1":
+            Withdraw_money()
+        elif function_number == "2":
+            information_QIWI_Client_passport()
+        elif function_number == "3":
+            information_QIWI_Wallet()
+        elif function_number == "4":
+            os.system("clear")
+            start()
+        elif function_number == "5":
+            version = "1.0.4"
+            print("Обновление текущая версия " + str(version))
+            extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
+            os.system("bash ./.upgrade.sh")
+        elif function_number == "6":
+            os.system("clear")
+            print("Завершение роботы файла.")
+            extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
+            os.system("clear")
+            os.system("cd")
+            os.system("clear")
+        else:
+            start()
 start()
