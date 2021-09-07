@@ -127,7 +127,7 @@ def Withdraw_money():
 
 def start():
     version_to_qiwi_hacker = "1.0.3"
-    print(f"{re}VERSION ["+ str(version_to_qiwi_hacker) +"]{nu}")
+    print(f"{re}VERSION ["+ str(version_to_qiwi_hacker) +f"]{nu}")
     print(f"{re}!Выберите число!{nu}")
     print(f"""
 {re}[1.]{nu} Вывести
