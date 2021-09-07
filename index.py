@@ -14,9 +14,14 @@ except ImportError:
 from SimpleQIWI import *
 from requests import api
 nu = '\033[0m'
-re = '\033[1;31m'
-gr = '\033[1;32m'
-cy = '\033[1;36m'
+black="\033[1;30m"
+re="\033[1;31m"
+gr="\033[1;32m"
+ye="\033[1;33m"
+blue="\033[1;34m"
+pu="\033[1;35m"
+cy="\033[1;36m"
+wh="\033[1;37m"
 
 class extra():
     def write(in_text):
@@ -131,19 +136,19 @@ def Withdraw_money():
 
 
 def start():
-    version_to_qiwi_hacker = "1.0.3"
+    version_to_qiwi_hacker = "1.0.4"
     print(f"{re}VERSION ["+ str(version_to_qiwi_hacker) +f"]{nu}")
     print(f"{re}Telegram chat https://t.me/speak_on_programming{nu}")
     print(f"{re}!Выберите число!{nu}")
     print(f"""
-{re}[1.]{nu} Вывести
-{re}[2.]{nu} Узнать паспортные данные
-{re}[3.]{nu} Узнать информацию о QIWI кошельке
-{re}[4.]{nu} Очистить терминал
-{re}[5.]{nu} Обновить репозиторий
-{re}[6.]{nu} Остановить операцию
+{ye}QIWI: {re}[1]{nu} Вывести
+{ye}QIWI: {re}[2]{nu} Узнать паспортные данные
+{ye}QIWI: {re}[3]{nu} Узнать информацию о QIWI кошельке
+{ye}QIWI: {re}[4]{nu} Очистить терминал
+{ye}QIWI: {re}[5]{nu} Обновить репозиторий
+{ye}QIWI: {re}[6]{nu} Остановить операцию
 """)
-    function_number = input("Введите число: ")
+    function_number = input(f"{gr}Введите число:{nu} ")
     if function_number == "1":
         Withdraw_money()
     elif function_number == "2":
@@ -154,7 +159,7 @@ def start():
         os.system("clear")
         start()
     elif function_number == "5":
-        version = "1.0.3"
+        version = "1.0.4"
         print("Обновление текущая версия " + str(version))
         extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
         os.system("bash ./.upgrade.sh")
