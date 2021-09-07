@@ -1,5 +1,6 @@
 import os, sys
 import time
+from time import sleep as timeout
 
 try:import requests
 except ImportError:
@@ -168,10 +169,18 @@ def start():
         elif function_number == "6":
             os.system("clear")
             print("Завершение роботы файла.")
-            extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
+            timeout(0.5)
+            print("Текущий директорий: "+ str(os.environ["PWD"]))
+            timeout(0.5)
+            print("Выход и репозитория: QIWI-HACKER")
+            os.system("cd..")
+            timeout(0.5)
+            print("Завершение!!!")
+            timeout(0.6)
             os.system("clear")
             os.system("cd")
             os.system("clear")
+            sys.exit()
         else:
             os.system("clear")
             start()
