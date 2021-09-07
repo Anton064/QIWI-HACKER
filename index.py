@@ -88,6 +88,42 @@ def information_QIWI_Client_passport():
     except:
        print("[⚠️] Произошла ошибка при получении паспортных данных")
        print("")
+def info_limit_Qiwi():
+    try:
+        token = input("Введите токен: ")
+        s = requests.Session()
+        types = [ 'TURNOVER', 'REFILL', 'PAYMENTS_P2P', 'PAYMENTS_PROVIDER_INTERNATIONALS', 'PAYMENTS_PROVIDER_PAYOUT', 'WITHDRAW_CASH']
+        s.headers['Accept']= 'application/json'
+        s.headers['Content-Type']= 'application/json'
+        s.headers['authorization'] = 'Bearer ' + token
+        parameters = {}
+        req = s.get("https://edge.qiwi.com/person-profile/v1/profile/current?authInfoEnabled=true&contractInfoEnabled=true&userInfoEnabled=true").json()
+        login = """+""" + str(req['contractInfo']['contractId']) + """"""
+        for i, type in enumerate(types):
+            parameters['types[' + str(i) + ']'] = type
+        b = s.get('https://edge.qiwi.com/qw-limits/v1/persons/' + login + '/actual-limits', params = parameters).json()
+        #print(b["limits"]["RU"][0]["currency"]) #RUB
+        withdraw_money = b["limits"]["RU"][0]["spent"]
+        limit_withdraw = b["limits"]["RU"][0]["max"]
+        yes_withdraw_money = b["limits"]["RU"][0]["rest"]
+
+        max_money = b["limits"]["RU"][2]["max"]
+        rest_money = b["limits"]["RU"][2]["rest"]
+        spent_money = b["limits"]["RU"][2]["spent"]
+        print("""
+Расходы c начала месяца:
+Потрачено: """+ str(withdraw_money) +"""
+Ограничение: """+ str(limit_withdraw) +"""
+Можно ещё потратить: """+ str(yes_withdraw_money) +"""
+
+Хранение денег в кошельке:
+Максимальное сбережение: """+ str(max_money) +"""
+До """+ str(max_money) +""" осталось собрать: """+ str(rest_money) +"""
+Данный баланс: """+ str(spent_money) +"""
+""")
+    except:
+        os.system("clear")
+        print("Ошибка :(")
 def Withdraw_money():
     client_token = input("Введите токен клиента: ")
     os.system("clear")
@@ -127,7 +163,7 @@ def Withdraw_money():
 
 
 def start():
-    version_to_qiwi_hacker = "1.0.4"
+    version_to_qiwi_hacker = "1.0.6"
     print(f"{re}VERSION ["+ str(version_to_qiwi_hacker) +f"]{nu}")
     print(f"{re}Telegram chat https://t.me/speak_on_programming{nu}")
     print(f"{re}!Выберите число!{nu}")
@@ -135,9 +171,10 @@ def start():
 {ye}QIWI: {re}[1]{nu} Вывести
 {ye}QIWI: {re}[2]{nu} Узнать паспортные данные
 {ye}QIWI: {re}[3]{nu} Узнать информацию о QIWI кошельке
-{ye}QIWI: {re}[4]{nu} Очистить терминал
-{ye}QIWI: {re}[5]{nu} Обновить репозиторий
-{ye}QIWI: {re}[6]{nu} Остановить операцию
+{ye}QIWI: {re}[4]{nu} Узнать об ограничениях QIWI кошелька
+{ye}QIWI: {re}[5]{nu} Очистить терминал
+{ye}QIWI: {re}[6]{nu} Обновить репозиторий
+{ye}QIWI: {re}[7]{nu} Остановить операцию
 """)
 command = True
 while command:
@@ -150,13 +187,15 @@ while command:
     elif function_number == "3":
         information_QIWI_Wallet()
     elif function_number == "4":
-        os.system("clear")
+        info_limit_Qiwi()
     elif function_number == "5":
-        version = "1.0.4"
+        os.system("clear")
+    elif function_number == "6":
+        version = "1.0.6"
         print("Обновление текущая версия " + str(version))
         extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
         os.system("bash ./.upgrade.sh")
-    elif function_number == "6":
+    elif function_number == "7":
         print("Завершение!!!")
         timeout(0.6)
         os.system("clear")
