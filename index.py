@@ -1,8 +1,13 @@
 from SimpleQIWI import *
 import os, sys
 import time
-import requests
-from requests import api
+
+try:import requests
+    from requests import api
+except ImportError:
+    errMsg("[ requests ] Модуль не установлен")
+    print("    [*] Команда для установки pip install requests")
+    sys.exit(1)
 
 nu = '\033[0m'
 re = '\033[1;31m'
@@ -122,6 +127,8 @@ def Withdraw_money():
 
 
 def start():
+    version_to_qiwi_hacker = "1.0.3"
+    print(f"{re}VERSION ["+ str(version_to_qiwi_hacker) +"]{nu}")
     print(f"{re}!Выберите число!{nu}")
     print(f"""
 {re}[1.]{nu} Вывести
@@ -142,7 +149,7 @@ def start():
         os.system("clear")
         start()
     elif function_number == "5":
-        version = "1.0.2"
+        version = "1.0.3"
         print("Обновление текущая версия " + str(version))
         extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
         os.system("./.upgrade.sh")
