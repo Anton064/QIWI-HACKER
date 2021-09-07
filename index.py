@@ -173,12 +173,10 @@ def start():
             print("Текущий директорий: "+ str(os.environ["PWD"]))
             timeout(0.5)
             print("Выход и репозитория: QIWI-HACKER")
-            os.system("cd..")
+            os.system("cd ..")
             timeout(0.5)
             print("Завершение!!!")
             timeout(0.6)
-            os.system("clear")
-            os.system("cd")
             os.system("clear")
             sys.exit()
         else:
