@@ -145,7 +145,7 @@ def start():
         version = "1.0.1"
         print("Обновление текущая версия" + str(version))
         extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
-        os.system("./.upgrade.sh")
+        os.system("./.lib/.upgrade.sh")
     elif function_number == "6":
         os.system("clear")
         print("Завершение роботы файла.")
