@@ -173,5 +173,6 @@ def start():
             os.system("cd")
             os.system("clear")
         else:
+            os.system("clear")
             start()
 start()
