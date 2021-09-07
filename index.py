@@ -3,12 +3,11 @@ import os, sys
 import time
 
 try:import requests
-    from requests import api
 except ImportError:
     errMsg("[ requests ] Модуль не установлен")
     print("    [*] Команда для установки pip install requests")
     sys.exit(1)
-
+from requests import api
 nu = '\033[0m'
 re = '\033[1;31m'
 gr = '\033[1;32m'
