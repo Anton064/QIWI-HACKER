@@ -182,14 +182,15 @@ def Withdraw_money():
 3. Возможно что служба РФ ограничила доступ к QIWI кошельку даже клиенту.
 """)
         print("")
-
+def info():
 
 def start():
     version_to_qiwi_hacker = "1.0.7"
+    new_information = f"{gr}!Внимание скоро будет обновление.{ye}"
     print(f"{re}VERSION ["+ str(version_to_qiwi_hacker) +f"]{nu}")
     print(f"{re}Telegram chat https://t.me/speak_on_programming{nu}")
     print(f"{re}!Выберите число!{nu}")
-    print(f"""
+    print(f"""{new_information}
 {ye}QIWI: {re}[1]{nu} Вывести
 {ye}QIWI: {re}[2]{nu} Узнать паспортные данные
 {ye}QIWI: {re}[3]{nu} Узнать информацию о QIWI кошельке
@@ -197,11 +198,16 @@ def start():
 {ye}QIWI: {re}[5]{nu} Очистить терминал
 {ye}QIWI: {re}[6]{nu} Обновить репозиторий
 {ye}QIWI: {re}[7]{nu} Остановить операцию
+{ye}QIWI: {re}[8] Узнать об обновлении? #Временая функция{nu}
 """)
 command = True
 while command:
     start()
     function_number = input(f"{gr}Введите число:{nu} ")
+    if function_number == "8":
+        print(f"""{nu}1. {gr}Проверка данных профиля Brawl Stars по тегу.{nu}
+        2. {gr}Сохранение паспортных данных.{nu}
+        """)
     if function_number == "1":
         Withdraw_money()
     elif function_number == "2":
